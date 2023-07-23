@@ -8,12 +8,16 @@ public static class Powershellhandler
     {
         PS.AddScript(script);
 
-        PS.AddCommand("Out-string");
+        PS.Invoke();
 
-        IAsyncResult result = PS.BeginInvoke<PSObject, PSObject>(null, null);
-
-        PS.EndInvoke(result);
-
+        // Print any error records to the console
+        if (PS.HadErrors)
+        {
+            foreach (var errorRecord in PS.Streams.Error)
+            {
+                Console.WriteLine($"Script Error: {errorRecord}");
+            }
+        }
         PS.Commands.Clear();
     }
 }
