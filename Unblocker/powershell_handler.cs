@@ -10,13 +10,13 @@ public static class Powershellhandler
 
         PS.Invoke();
 
-        // Print any error records to the console
         if (PS.HadErrors)
         {
             foreach (var errorRecord in PS.Streams.Error)
             {
                 Console.WriteLine($"Script Error: {errorRecord}");
             }
+            PS.Streams.Error.Clear();
         }
         PS.Commands.Clear();
     }
