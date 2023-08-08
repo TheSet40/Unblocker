@@ -20,7 +20,6 @@ namespace Unblocker
                 }
                 catch (TaskCanceledException)
                 {
-                    Console.WriteLine("early cancel");
                     return; 
                 }
             }
